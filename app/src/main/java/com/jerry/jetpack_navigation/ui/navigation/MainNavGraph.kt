@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -32,6 +31,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.jerry.jetpack_navigation.model.Food
+import com.jerry.jetpack_navigation.ui.screen.HomeScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -80,56 +80,9 @@ fun MainNavGraph(
                 startDestination = MainRoute.HomeScreen.route
             ) {
                 composable(route = MainRoute.HomeScreen.route) {
-                    val foodList = listOf(
-                        Food(
-                            name = "apple",
-                            price = "$20.00"
-                        ),
-                        Food(
-                            name = "Meat",
-                            price = "$100.00"
-                        )
+                    HomeScreen(
+                        mainNavController = mainNavController
                     )
-                    LazyColumn(
-                        Modifier.fillMaxSize(),
-                    ) {
-                        items(foodList){
-                            ListItem(
-                                headlineContent = {
-                                    Column {
-                                        Text ("name: ${it.name}")
-                                        Text ("name: ${it.price}")
-                                    }
-                                },
-                                trailingContent = {
-                                    Button(onClick = {
-                                        val bundle = Bundle()
-                                        bundle.putParcelable("item", it)
-                                        mainNavController.navigate(
-                                            route = MainRoute.DetailScreen.route,
-                                            args = bundle
-                                        )
-                                    }){
-                                        Text ("Detail")
-                                    }
-                                }
-                            )
-                        }
-
-                        item {
-                            Button(onClick = {
-                                val bundle = Bundle()
-                                bundle.putParcelableArrayList("list", ArrayList(foodList))
-                                mainNavController.navigate(
-                                    route = MainRoute.FullListScreen.route,
-                                    args = bundle
-                                )
-                            }){
-                                Text ("With full list")
-                            }
-                        }
-                    }
-
                 }
 
                 composable(route = MainRoute.DetailScreen.route) {
