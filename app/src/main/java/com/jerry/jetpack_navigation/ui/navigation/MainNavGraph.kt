@@ -6,8 +6,12 @@ import android.os.Bundle
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.NavigationBar
@@ -22,6 +26,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
@@ -31,6 +37,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.jerry.jetpack_navigation.model.Food
+import com.jerry.jetpack_navigation.ui.components.CustomerNavigationBar
+import com.jerry.jetpack_navigation.ui.components.CustomerNavigationBarItem
 import com.jerry.jetpack_navigation.ui.screen.HomeScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -42,38 +50,38 @@ fun MainNavGraph(
     val currentSelectedScreen by mainNavController.currentScreenAsState()
     Scaffold(
         bottomBar = {
-            NavigationBar {
-                NavigationBarItem(
+            CustomerNavigationBar (
+                containerColor = Color.White
+            ){
+                CustomerNavigationBarItem (
                     selected = currentSelectedScreen == MainRoute.HomeScreen,
+                    modifier = Modifier.weight(1f),
+                    icon = Icons.Filled.Home,
+                    text = "Home",
                     onClick = {
                         mainNavController.navigate(MainRoute.HomeScreen.route)
-                    },
-                    label = {
-                        Text("Home")
-                    },
-                    icon = {
-
                     }
                 )
-
-                NavigationBarItem(
+                CustomerNavigationBarItem (
                     selected = currentSelectedScreen == MainRoute.SettingScreen,
+                    modifier = Modifier.weight(1f),
+                    icon = Icons.Filled.Settings,
+                    text = "Setting",
                     onClick = {
                         mainNavController.navigate(MainRoute.SettingScreen.route)
-                    },
-                    label = {
-                        Text("Setting")
-                    },
-                    icon = {
-
                     }
                 )
-
             }
+
         }
-    ) {
+    ) {paddingValues->
+        val heightToDecrease = 20.dp
+
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().padding(
+                top = paddingValues.calculateTopPadding(),
+                bottom = paddingValues.calculateBottomPadding() - heightToDecrease
+            )
         ) {
             NavHost(
                 navController = mainNavController,
