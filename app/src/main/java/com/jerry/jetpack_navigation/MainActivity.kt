@@ -10,7 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.jerry.jetpack_navigation.ui.navigation.AppNavGraph
+import com.jerry.jetpack_navigation.ui.navigation.AppNavHost
+
 import com.jerry.jetpack_navigation.ui.theme.JetpacknavigationTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AppNavGraph()
+                    AppNavHost()
                 }
             }
         }
