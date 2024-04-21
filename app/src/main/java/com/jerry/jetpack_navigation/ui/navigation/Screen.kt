@@ -11,5 +11,7 @@ sealed class Screen(val route: String) {
     data object Dashboard: Screen("dashboard"){
         data object HomeScreen: Screen("home")
         data object SettingScreen: Screen("setting")
+        data object DialogA: Screen("dialogA")
+        data object DialogB: Screen("dialogB")
     }
 }

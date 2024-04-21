@@ -45,7 +45,7 @@ fun AppNavHost(
                             }
                         }
                     } ) {
-                        Text(text = "Login -> goto app main page")
+                            Text(text = "Login -> goto app main page")
                     }
                 }
             }
@@ -53,14 +53,19 @@ fun AppNavHost(
                 Button(onClick = {
                     navController.popBackStack()
                 } ) {
-                    Text(text = "This is Register Screen, Back to login Screen")
+                    Column {
+                        Text(text = "This is Register Screen, Back to login Screen")
+                    }
                 }
 
             }
         }
 
         composable(route = Screen.Dashboard.route){
-            DashBoardNavHost()
+            val dashboardNavController: NavHostController = rememberNavController()
+            DashBoardNavHost(
+                navController = dashboardNavController
+            )
         }
     }
 }
